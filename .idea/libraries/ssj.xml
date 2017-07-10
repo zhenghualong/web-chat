@@ -1,0 +1,19 @@
+<component name="libraryTable">
+  <library name="ssj">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/src/lib/Blas.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/lib/colt.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/lib/event-1.6.5.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/lib/interpreter-1.6.8.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/lib/jcommon-1.0.13.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/lib/jfreechart-1.0.10.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/lib/language-1.6.7.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/lib/logger-1.6.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/lib/optimization.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/lib/ssj.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/lib/tcode.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
