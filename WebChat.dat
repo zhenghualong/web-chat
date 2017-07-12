@@ -1,0 +1,28 @@
+281.25     lambda-arrival rate
+25         N-number of agents
+
+4          muOne-service rate from level One
+3.8        muTwo-service rate from level Two
+3.3        muThree-service rate from level Three
+3          muFour-service rate from level Four
+2.75       muFive-service rate from level Five
+2.5        muSix-service rate from level Six
+
+0          typeFq Zero-exponential One-log normal
+1          meanFq
+1          varFq
+
+0          typeG
+1          meanG
+1          varG
+
+0          typeF
+1          meanF
+1          varF
+
+0          Priority
+1
+2
+3
+4
+5
