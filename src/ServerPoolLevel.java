@@ -28,6 +28,8 @@ public class ServerPoolLevel {
         size--;
         serverpool.ZSizeUpdate(levelID,size);
 
+//        System.out.println ("servicelvel " + levelID + "\n");
+//        System.out.println ("servicelvel 2 size " + serverpool.getServiceLevel(2).size + "\n");
         Agent agent = servicelevel.remove(0);
         serverpool.getServiceLevel(levelID+1).admit(agent);
         agent.rescheduleServiceUp();

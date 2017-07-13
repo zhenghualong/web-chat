@@ -41,7 +41,10 @@ public class ServerPool {
         int temp = 0;
         for (int i = 0; i < webchat.I; i++){
             if(getServiceLevel(webchat.priority[i]).size > 0){
-                temp = i;
+                temp = webchat.priority[i];
+//                System.out.println ("servicelvel positive " + i + "\n");
+//                System.out.println ("get service level size " + getServiceLevel(webchat.priority[i]).size + "\n");
+//                System.out.println ("get service level 2 size " + getServiceLevel(2).size + "\n");
                 break;
             }
         }

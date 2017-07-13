@@ -12,9 +12,9 @@
 1          meanFq
 1          varFq
 
-0          typeG
+1          typeG
 1          meanG
-1          varG
+0.2          varG
 
 0          typeF
 1          meanF

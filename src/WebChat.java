@@ -8,7 +8,7 @@ import java.io.IOException;
 public class WebChat {
 //simulation time
     double startTime, stopTime, endTime, duringTime;
-    double maxArrivals = 200000;
+    double maxArrivals = 2000000;
 
 //parameters
     int I = 6; //service levels
@@ -106,7 +106,7 @@ public class WebChat {
     }
 
     static public void main (String[] args) throws IOException {
-        WebChat webchat = new WebChat ("WebChat.dat");
+        WebChat webchat = new WebChat ("WebChat112.dat");
         for (int i = 0; i < 10; i++)  webchat.simulateOneRun();
 
         for (int i = 0; i < webchat.EZ.length; i++) {
