@@ -12,8 +12,8 @@ class InitEvent extends Event {
     }
     public void actions() {
         webchat.QSize      = new Accumulate ("QSize");
-        webchat.ZSize = new Accumulate[webchat.I];
-        for(int i = 0; i< webchat.I; i++){
+        webchat.ZSize = new Accumulate[webchat.EZ.length];
+        for(int i = 0; i< webchat.EZ.length; i++){
             webchat.ZSize[i] = new Accumulate ("ZSize of Agents in Level i+1");
             webchat.ZSize[i].init();
         }

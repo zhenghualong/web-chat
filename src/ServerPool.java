@@ -3,32 +3,28 @@
  */
 import java.util.ArrayList;
 public class ServerPool {
-    int NAgents;
-    int ILevel;
     WebChat webchat;
 
     ArrayList<ServerPoolLevel> pool = new ArrayList<>();
 
-    public ServerPool(int N, int ILevel, WebChat webchat){
-        NAgents = N;
-        this.ILevel = ILevel;
+    public ServerPool(WebChat webchat){
         this.webchat = webchat;
     }
 
     public void init(){
         pool.clear();
 
-        for(int i = 0; i < ILevel+1; i++){
-            pool.add(new ServerPoolLevel(i, this, webchat));
+        for(int i = 0; i < webchat.I+1; i++){
+            pool.add(new ServerPoolLevel(i, this));
         }
-        for(int i = 0; i< NAgents; i++){
-            pool.get(0).admit(new Agent(i, 0));
+        for(int i = 0; i< webchat.N; i++){
+            pool.get(0).admit(new Agent(i, 0, this));
         }
 
     }
 
     public boolean isBusy(){
-        if(pool.get(ILevel).size == NAgents){
+        if(pool.get(webchat.I).size == webchat.N){
             return true;
         }
         else{
@@ -43,7 +39,7 @@ public class ServerPool {
 
     public int priorityLevel(){
         int temp = 0;
-        for (int i = 0; i < ILevel; i++){
+        for (int i = 0; i < webchat.I; i++){
             if(getServiceLevel(webchat.priority[i]).size > 0){
                 temp = i;
                 break;
@@ -52,14 +48,9 @@ public class ServerPool {
         return temp;
     }
 
-    private int getLevelSize(int levelID){
-        return getServiceLevel(levelID).size;
-    }
 
     public void ZSizeUpdate(int levelID, int size){
-        if(levelID > 0) {
-            webchat.ZSize[levelID-1].update(size);
-        }
+            webchat.ZSize[levelID].update(size);
     }
 
 }

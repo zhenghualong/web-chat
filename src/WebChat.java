@@ -8,7 +8,7 @@ import java.io.IOException;
 public class WebChat {
 //simulation time
     double startTime, stopTime, endTime, duringTime;
-    double maxArrivals = 2E6;
+    double maxArrivals = 200000;
 
 //parameters
     int I = 6; //service levels
@@ -50,7 +50,7 @@ public class WebChat {
     Tally PAb = new Tally ("Probability of Abandonment");
     Tally AbRate = new Tally ("Abandon Rate");
 
-    Tally[] EZ = new Tally[I];
+    Tally[] EZ = new Tally[I+1];
 
 //random events
     GenRandomVariable genArr, genFq, genG, genF;
@@ -72,13 +72,13 @@ public class WebChat {
         genG  = new GenRandomVariable(meanG,  varG,  typeG);
         genF  = new GenRandomVariable(meanF,  varF,  typeF);
 
-        for(int i = 0; i< I; i++){
-            EZ[i] = new Tally ("Expected Number of Agents in Level i+1");
+        for(int i = 0; i< EZ.length; i++){
+            EZ[i] = new Tally ("Expected Number of Agents in Level i");
         }
 
         nextArrival = new ArrivalEvent(this);
 
-        serverpool = new ServerPool(N, I, this);
+        serverpool = new ServerPool(this);
         buffer = new Buffer();
     }
 
@@ -99,7 +99,7 @@ public class WebChat {
         AbRate.add(nAbandon / duringTime);
 
 
-        for(int i = 0; i < I; i++){
+        for(int i = 0; i < EZ.length; i++){
             EZ[i].add(ZSize[i].average());
         }
 
@@ -107,16 +107,23 @@ public class WebChat {
 
     static public void main (String[] args) throws IOException {
         WebChat webchat = new WebChat ("WebChat.dat");
-        for (int i = 0; i < 1000; i++)  webchat.simulateOneRun();
+        for (int i = 0; i < 10; i++)  webchat.simulateOneRun();
 
         for (int i = 0; i < webchat.EZ.length; i++) {
             webchat.EZ[i].setConfidenceIntervalStudent();
             webchat.EZ[i].setConfidenceLevel (0.95);
         }
         System.out.println (Tally.report ("WebChat Server Pool:", webchat.EZ));
+        webchat.EQ.setConfidenceIntervalStudent();
+        webchat.EW_S.setConfidenceIntervalStudent();
+        webchat.EW_A.setConfidenceIntervalStudent();
+        webchat.EW.setConfidenceIntervalStudent();
+        webchat.PAb.setConfidenceIntervalStudent();
+        webchat.AbRate.setConfidenceIntervalStudent();
         System.out.println (webchat.EQ.report (0.95, 3));
         System.out.println (webchat.EW_S.report (0.95, 3));
         System.out.println (webchat.EW_A.report (0.95, 3));
+        System.out.println (webchat.EW.report (0.95, 3));
         System.out.println (webchat.PAb.report (0.95, 3));
         System.out.println (webchat.AbRate.report (0.95, 3));
 

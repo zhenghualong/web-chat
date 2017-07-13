@@ -26,12 +26,9 @@ class ArrivalEvent extends Event {
 
             double nextDouble= webchat.genArr.nextDouble();
 
-            if(aTime + nextDouble< webchat.endTime){
-                webchat.nextArrival.schedule(nextDouble);
-            }
-            else{
-                webchat.nextArrival.cancel();
-            }
+
+            webchat.nextArrival.schedule(nextDouble);
+
 
             if (webchat.serverpool.isBusy()) {
                 cust.joinQueue(webchat.buffer);
@@ -49,6 +46,7 @@ class ArrivalEvent extends Event {
                 cust.getService(levelID);
 
                 cust.scheduleCompleteService();
+                cust.scheduleRenegeS();
             }
 
         }

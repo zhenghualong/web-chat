@@ -13,7 +13,7 @@ class RenegeSEvent extends Event {
     public void actions() {
         // if that is really an abandonment
         if (cust.isInService()){
-            int levelID = cust.getLevelID();
+            int levelID = cust.levelID;
             cust.renegeS();
             try {
                 new DataUpdate(webchat,cust).RenEventSUpdate();
@@ -24,7 +24,7 @@ class RenegeSEvent extends Event {
             if(levelID == webchat.I && webchat.buffer.isNonEmpty()){
                 Customer nextCust = webchat.buffer.nextInQueue();
                 nextCust.getInitiativeService();
-
+                nextCust.scheduleCompleteService();
                 nextCust.scheduleRenegeS();
             }
         }
