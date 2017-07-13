@@ -50,7 +50,6 @@ public class Agent{
         levelID++;
         for (int i=0; i < agentServeCustomer.size(); i++){
             agentServeCustomer.get(i).rescheduleServiceUp(this);
-            int temp = serverPool.getServiceLevel(0).size;
         }
     }
 

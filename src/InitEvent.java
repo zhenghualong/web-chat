@@ -6,7 +6,6 @@ import umontreal.iro.lecuyer.simevents.Event;
 import umontreal.iro.lecuyer.stat.Tally;
 class InitEvent extends Event {
     WebChat webchat;
-    int nClass;
     public InitEvent(WebChat webchat) {
         this.webchat = webchat;
     }

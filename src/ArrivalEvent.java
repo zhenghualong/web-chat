@@ -23,10 +23,7 @@ class ArrivalEvent extends Event {
             Customer cust = new Customer(aTime, sTime, pTimeInQ, pTimeInS, webchat);
 
             new DataUpdate(webchat,cust).ArrivalUpdate();
-
             double nextDouble= webchat.genArr.nextDouble();
-
-
             webchat.nextArrival.schedule(nextDouble);
 
 
@@ -44,7 +41,6 @@ class ArrivalEvent extends Event {
                 int levelID;
                 levelID = webchat.serverpool.priorityLevel();
                 cust.getService(levelID);
-
                 cust.scheduleCompleteService();
                 cust.scheduleRenegeS();
             }

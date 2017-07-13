@@ -6,11 +6,11 @@ import java.io.IOException;
  * Created by zhenghualong on 10/7/2017.
  */
 public class WebChat {
-//simulation time
+    //simulation time
     double startTime, stopTime, endTime, duringTime;
-    double maxArrivals = 2000000;
+    double maxArrivals = 2E5;
 
-//parameters
+    //parameters
     int I = 6; //service levels
 
     double lambda; //arrival rate
@@ -31,7 +31,7 @@ public class WebChat {
 
     int[] priority = new int[I]; //priority order
 
-//performance measures
+    //performance measures
     int nArrivals, nServed, nAbandon;
 
     Accumulate QSize;
@@ -52,7 +52,7 @@ public class WebChat {
 
     Tally[] EZ = new Tally[I+1];
 
-//random events
+    //random events
     GenRandomVariable genArr, genFq, genG, genF;
     ArrivalEvent nextArrival;
 
@@ -73,7 +73,8 @@ public class WebChat {
         genF  = new GenRandomVariable(meanF,  varF,  typeF);
 
         for(int i = 0; i< EZ.length; i++){
-            EZ[i] = new Tally ("Expected Number of Agents in Level i");
+            String temp = "Expected Number of Agents in Level " + Integer.toString(i);
+            EZ[i] = new Tally (temp);
         }
 
         nextArrival = new ArrivalEvent(this);
@@ -106,7 +107,7 @@ public class WebChat {
     }
 
     static public void main (String[] args) throws IOException {
-        WebChat webchat = new WebChat ("WebChat112.dat");
+        WebChat webchat = new WebChat ("WebChat.dat");
         for (int i = 0; i < 10; i++)  webchat.simulateOneRun();
 
         for (int i = 0; i < webchat.EZ.length; i++) {
@@ -120,13 +121,16 @@ public class WebChat {
         webchat.EW.setConfidenceIntervalStudent();
         webchat.PAb.setConfidenceIntervalStudent();
         webchat.AbRate.setConfidenceIntervalStudent();
-        System.out.println (webchat.EQ.report (0.95, 3));
-        System.out.println (webchat.EW_S.report (0.95, 3));
-        System.out.println (webchat.EW_A.report (0.95, 3));
-        System.out.println (webchat.EW.report (0.95, 3));
-        System.out.println (webchat.PAb.report (0.95, 3));
-        System.out.println (webchat.AbRate.report (0.95, 3));
+        int digit = 5;
+        double confidentLevel = 0.95;
+        System.out.println (webchat.AbRate.report (confidentLevel, digit));
 
+        System.out.println (webchat.EW_S.report (confidentLevel, digit));
+        System.out.println (webchat.EW_A.report (confidentLevel, digit));
+        System.out.println (webchat.EW.report (confidentLevel, digit));
+        System.out.println (webchat.PAb.report (confidentLevel, digit));
+
+        System.out.println (webchat.EQ.report (confidentLevel, digit));
 
     }
 

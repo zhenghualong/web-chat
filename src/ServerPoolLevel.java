@@ -28,8 +28,6 @@ public class ServerPoolLevel {
         size--;
         serverpool.ZSizeUpdate(levelID,size);
 
-//        System.out.println ("servicelvel " + levelID + "\n");
-//        System.out.println ("servicelvel 2 size " + serverpool.getServiceLevel(2).size + "\n");
         Agent agent = servicelevel.remove(0);
         serverpool.getServiceLevel(levelID+1).admit(agent);
         agent.rescheduleServiceUp();
@@ -53,7 +51,6 @@ public class ServerPoolLevel {
         for(int i=0;i<servicelevel.size();i++){
             if(servicelevel.get(i).ID == ID){
                 temp=i;
-//                System.out.printf("Find " + i +"\n");
                 break;
             }
         }
@@ -64,7 +61,6 @@ public class ServerPoolLevel {
     public void renegeServe(Customer cust){  //renege from service or service completion
         size--;
         serverpool.ZSizeUpdate(levelID,size); //update for the server pool level size
-
 
         Agent agent = servicelevel.remove(getAgentIndexInLevel(cust.agentID));
         agent.removeRenegeCus();

@@ -5,7 +5,6 @@ import umontreal.iro.lecuyer.randvar.*;
 import umontreal.iro.lecuyer.rng.*;
 
 public class GenRandomVariable {
-    RandomStream streamRan=new MRG32k3a();
     RandomVariateGen genRan;
     double LogNormMu, LogNormSigma;
 

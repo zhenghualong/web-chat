@@ -16,7 +16,6 @@ class ServiceCompleteEvent extends Event {
         if (cust.isInService()){
             cust.completeServiceTime = Sim.time();
             int levelID = cust.levelID;
-//            System.out.printf("complete Event level ID isinservice " + cust.isInService()+"\n");
             cust.completeService();
             try {
                 new DataUpdate(webchat,cust).ServiceCompleteUpdate();
@@ -26,7 +25,6 @@ class ServiceCompleteEvent extends Event {
             }
             if(levelID == webchat.I && webchat.buffer.isNonEmpty()){
                 Customer nextCust = webchat.buffer.nextInQueue();
-//                System.out.printf("long!!!!!!!!!!!! " +"\n");
                 nextCust.getInitiativeService();
                 nextCust.scheduleCompleteService();
                 nextCust.scheduleRenegeS();
