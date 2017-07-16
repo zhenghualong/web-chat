@@ -8,7 +8,8 @@ public class Customer {
      double arrivalTime, // time when arrive, via Sim.time(), single use
             sTime, // service time, via random gen
             pTimeInQ,	// patient time, via random gen
-            pTimeInS;
+            pTimeInS,
+            startServiceTime;
 
      int reneged, // if reneged 1, else 0
             served, // if service finished 1, else 0
@@ -44,7 +45,7 @@ public class Customer {
         inQueue = 0;
         inService = 0;
 
-        previousRescheduleTime = aTime;
+//        previousRescheduleTime = aTime;
     }
 
 
@@ -62,6 +63,7 @@ public class Customer {
         served = 0;
         inQueue = 0;
         inService = 1;
+        startServiceTime = Sim.time();
         webchat.serverpool.getServiceLevel(levelID).startServe(this);
     }
 
@@ -70,17 +72,18 @@ public class Customer {
         served = 0;
         inQueue = 0;
         inService = 1;
+        startServiceTime = Sim.time();
         webchat.serverpool.getServiceLevel(webchat.I-1).startServe(this);
     }
 
 
     public void renegeQ(){
-        waitTime = Sim.time() - arrivalTime;
-        webchat.buffer.renege();
         reneged = 1;
         served = 0;
         inQueue = 0;
         inService = 0;
+        waitTime = Sim.time() - arrivalTime;
+        webchat.buffer.renege();
     }
 
     public void renegeS(){
@@ -106,6 +109,13 @@ public class Customer {
         levelID = agent.levelID;
         receivedServiceTime = receivedServiceTime + (Sim.time() - previousRescheduleTime)  * webchat.mu[levelID];
         remainingServiceTime = sTime - receivedServiceTime;
+//        System.out.println ("sTime" + sTime + "\n");
+//        System.out.println ("receivedServiceTime" + receivedServiceTime + "\n");
+//        System.out.println ("isInService" + isInService() + "\n");
+//        System.out.println ("previousRescheduleTime" + previousRescheduleTime + "\n");
+//        System.out.println ("arrival Time" + arrivalTime + "\n");
+//        System.out.println ("Service Complete Time" + serviceCompleteEvent.time() + "\n");
+//        System.out.println ("levelID" + levelID + "\n");
         serviceCompleteEvent.reschedule(remainingServiceTime / webchat.mu[levelID - 1]);
         previousRescheduleTime = Sim.time();
     }
@@ -159,6 +169,7 @@ public class Customer {
     }
 
     public void scheduleCompleteService(){
+        previousRescheduleTime = Sim.time();
         serviceCompleteEvent = new ServiceCompleteEvent(webchat, this);
         serviceCompleteEvent.schedule(sTime / webchat.mu[levelID -1]);
     }

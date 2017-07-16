@@ -13,10 +13,12 @@ class InitEvent extends Event {
         webchat.QSize      = new Accumulate ("QSize");
         webchat.ZSize = new Accumulate[webchat.EZ.length];
         for(int i = 0; i< webchat.EZ.length; i++){
-            webchat.ZSize[i] = new Accumulate ("ZSize of Agents in Level i+1");
+            String temp = "ZSize of Agents in Level " + Integer.toString(i);
+            webchat.ZSize[i] = new Accumulate (temp);
             webchat.ZSize[i].init();
         }
         webchat.Wait = new Tally ("Wait");
+        webchat.WaitSquare = new Tally ("Wait * Wait");
         webchat.WaitS = new Tally ("WaitS");
         webchat.WaitAb = new Tally ("WaitAb");
 

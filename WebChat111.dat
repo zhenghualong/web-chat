@@ -8,7 +8,7 @@
 2.75       muFive-service rate from level Five
 2.5        muSix-service rate from level Six
 
-0          typeFq Zero-exponential One-log normal
+1          typeFq Zero-exponential One-log normal
 1          meanFq
 1          varFq
 
@@ -23,6 +23,6 @@
 0          Priority
 1
 2
-3
-4
 5
+4
+3

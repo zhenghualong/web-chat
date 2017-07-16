@@ -20,6 +20,7 @@ public class DataUpdate {
             webchat.nAbandon++;
             webchat.WaitAb.add(cust.waitTime);
             webchat.Wait.add(cust.waitTime);
+            webchat.WaitSquare.add(cust.waitTime * cust.waitTime);
             webchat.QSize.update(webchat.buffer.getSize());
         }
     }
@@ -28,6 +29,7 @@ public class DataUpdate {
         if(recordTime()){
             webchat.nAbandon++;
             webchat.Wait.add(cust.waitTime);
+            webchat.WaitSquare.add(cust.waitTime * cust.waitTime);
             webchat.WaitAb.add(cust.waitTime);
         }
     }
@@ -36,6 +38,7 @@ public class DataUpdate {
         if(recordTime()){
             webchat.nServed++;
             webchat.Wait.add(cust.waitTime);
+            webchat.WaitSquare.add(cust.waitTime * cust.waitTime);
             webchat.WaitS.add(cust.waitTime);
         }
     }
